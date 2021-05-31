@@ -1,3 +1,9 @@
+## v1.2.0 (2021-05-31)
+
+### Feat
+
+- add complexity check job
+
 ## v1.1.0 (2021-05-31)
 
 ### Feat
