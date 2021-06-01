@@ -11,12 +11,7 @@ export AWS_ACCESS_KEY_ID=$AWS_KEY
 export AWS_SECRET_ACCESS_KEY=$AWS_SECRET
 export AWS_DEFAULT_REGION=$AWS_REGION
 
-ECR_TOKEN=$(aws ecr get-login-password)
-
-echo $ECR_TOKEN
-echo $REGISTRY
-
-docker login -u AWS -p "$ECR_TOKEN" $REGISTRY
+docker login -u AWS -p $(aws ecr get-login-password --region "$AWS_REGION") $REGISTRY
 
 docker tag $APP_NAME:latest $REGISTRY/$APP_NAME:latest
 docker push $REGISTRY/$APP_NAME:latest
