@@ -58,39 +58,37 @@ runs:
       shell: bash
 
     - name: Build image
-      run: sh ${{ github.action_path }}/../common/docker/build.sh
+      run: |
+        sh ${{ github.action_path }}/../common/docker/build.sh \
+          ${{ inputs.stage }} \
+          ${{ inputs.app-name }} \
+          ${{ inputs.app-port }} \
+          ${{ inputs.aws-access-key-id }} \
+          ${{ inputs.aws-region }} \
+          ${{ inputs.aws-secret-access-key }}
       shell: bash
-      env:
-        APP_NAME: ${{ inputs.app-name }}
-        STAGE: ${{ inputs.stage }}
-        APP_PORT: ${{ inputs.app-port }}
-        AWS_ACCESS_KEY_ID: ${{ inputs.aws-access-key-id }}
-        AWS_DEFAULT_REGION: ${{ inputs.aws-region }}
-        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}
 
     - name: Push image
       run: |
-        sh ${{ github.action_path }}/../common/docker/push.sh ${{ inputs.tag }}
+        sh ${{ github.action_path }}/../common/docker/push.sh \
+          ${{ inputs.tag }} \
+          ${{ inputs.app-name }} \
+          ${{ inputs.repository }} \
+          ${{ inputs.aws-access-key-id }} \
+          ${{ inputs.aws-secret-access-key }} \
+          ${{ inputs.aws-region }}
       shell: bash
-      env:
-        APP_NAME: ${{ inputs.app-name }}
-        REGISTRY: ${{ inputs.repository }}
-        AWS_ACCESS_KEY_ID: ${{ inputs.aws-access-key-id }}
-        AWS_DEFAULT_REGION: ${{ inputs.aws-region }}
-        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}
 
     - name: Deploy with CF
       run: |
         sh ${{ github.action_path }}/../common/docker/deploy.sh \
-          ${{ github.action_path }}/${{ inputs.stack-file }} \
-          ${{ inputs.tag }}
+          "${{ github.action_path }}/${{ inputs.stack-file }}" \
+          ${{ inputs.tag }} \
+          ${{ inputs.app-name }} \
+          ${{ inputs.app-port }} \
+          ${{ inputs.repository }} \
+          ${{ inputs.cluster }} \
+          ${{ inputs.aws-access-key-id }} \
+          ${{ inputs.aws-secret-access-key }} \
+          ${{ inputs.aws-region }}
       shell: bash
-      env:
-        STAGE: ${{ inputs.stage }}
-        CLUSTER: ${{ inputs.cluster }}
-        APP_PORT: ${{ inputs.app-port }}
-        APP_NAME: ${{ inputs.app-name }}
-        REGISTRY: ${{ inputs.repository }}
-        AWS_ACCESS_KEY_ID: ${{ inputs.aws-access-key-id }}
-        AWS_DEFAULT_REGION: ${{ inputs.aws-region }}
-        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}
