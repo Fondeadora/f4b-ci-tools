@@ -81,6 +81,7 @@ runs:
 
     - name: Deploy with CF
       run: |
+        ls -la && \
         sh ${{ github.action_path }}/../common/docker/deploy.sh \
           "$HOME/${{ inputs.stack-file }}" \
           ${{ inputs.tag }} \
