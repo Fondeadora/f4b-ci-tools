@@ -1,3 +1,9 @@
+## v1.3.0 (2021-06-01)
+
+### Feat
+
+- add docker deploy tools
+
 ## v1.2.0 (2021-05-31)
 
 ### Feat
