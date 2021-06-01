@@ -23,10 +23,6 @@ inputs:
     description: "Container name that will be used to be deployed"
     required: true
 
-  repostiry:
-    description: "URL of the docker repository on ECR"
-    required: true
-
   app-port:
     description: "Application port"
     required: false
