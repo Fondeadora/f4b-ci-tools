@@ -22,7 +22,7 @@ export AWS_DEFAULT_REGION=$AWS_REGION
 REPOSITORY="$AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com"
 
 aws cloudformation update-stack --stack-name $APP_NAME \
-  --template-body file:///$STACK_FILE --parameters \
+  --template-body file://$STACK_FILE --parameters \
   ParameterKey=DockerImage,ParameterValue=$REPOSITORY/$APP_NAME:$TAG_NAME \
   ParameterKey=ClusterName,ParameterValue=$CLUSTER \
   ParameterKey=AppName,ParameterValue=$APP_NAME \
