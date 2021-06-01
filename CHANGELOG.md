@@ -1,3 +1,9 @@
+## v1.4.3 (2021-06-01)
+
+### Fix
+
+- typo on stack file param
+
 ## v1.4.2 (2021-06-01)
 
 ### Fix
