@@ -41,6 +41,10 @@ runs:
       env:
         CACHE_HIT: ${{ inputs.cache_hit }}
 
+    - name: Install plugins
+      run: poetry plugin add poetry-dotenv-plugin
+      shell: bash
+
     - name: Run the tests
       run: ${{ inputs.test_command }}
       shell: bash

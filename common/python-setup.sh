@@ -4,4 +4,3 @@ for VERSION in "/opt/hostedtoolcache/Python/$PYTHON_VERSION"*; do
 done
 
 pip3 install -q poetry==1.2.0a1
-poetry plugin add poetry-dotenv-plugin
