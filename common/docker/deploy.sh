@@ -14,3 +14,5 @@ aws cloudformation update-stack --stack-name $APP_NAME \
   ParameterKey=ClusterName,ParameterValue=$CLUSTER \
   ParameterKey=AppName,ParameterValue=$APP_NAME \
   ParameterKey=ContainerPort,ParameterValue=$APP_PORT
+
+aws cloudformation wait stack-update-complete --stack-name $APP_NAME

@@ -2,13 +2,11 @@
 
 # Push new image tag to ECR
 #
-# @param $1 ecr_token - AWS ECR Access token
-# @param $2 tag_name - Tag Name that will be pushed
+# @param $1 tag_name - Tag Name that will be pushed
 
-ECR_TOKEN=$1
-TAG_NAME=$2
+TAG_NAME=$1
 
-docker login --username AWS -p "$ECR_TOKEN" $REGISTRY
+aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REGISTRY
 
 docker tag $APP_NAME:latest $REGISTRY/$APP_NAME:latest
 docker push $REGISTRY/$APP_NAME:latest

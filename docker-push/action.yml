@@ -70,9 +70,7 @@ runs:
 
     - name: Push image
       run: |
-        sh ${{ github.action_path }}/../common/docker/push.sh \
-          $(sh ${{ github.action_path }}/../common/docker/ecr_token.sh) \
-          ${{ inputs.tag }}
+        sh ${{ github.action_path }}/../common/docker/push.sh ${{ inputs.tag }}
       shell: bash
       env:
         APP_NAME: ${{ inputs.app-name }}
