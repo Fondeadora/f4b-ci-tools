@@ -42,6 +42,12 @@ runs:
       env:
         PYTHON_VERSION: ${{ inputs.python_version }}
 
+    - name: Setup Github access token
+      run: ${{ github.action_path }}/../common/git-setup.sh
+      shell: bash
+      env:
+        ACCESS_TOKEN: ${{ inputs.access_token }}
+
     - name: Install serverless dependencies
       run: ${{ github.action_path }}/../common/install-node-deps.sh
       shell: bash
