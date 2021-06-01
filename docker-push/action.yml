@@ -37,7 +37,7 @@ inputs:
     description: "New tag for docker image"
     required: false
 
-  stak-file:
+  stack-file:
     description: "Relative pat to the CF stack file for the deployment"
     required: true
     default: "stackcf.yml"
