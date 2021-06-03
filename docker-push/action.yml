@@ -14,7 +14,7 @@ inputs:
     description: "The AWS region to deploy the service to"
     required: false
     default: "us-east-1"
-    
+
   aws-account:
     description: "AWS account number that holds the repository"
     required: true
@@ -22,11 +22,6 @@ inputs:
   app-name:
     description: "Container name that will be used to be deployed"
     required: true
-
-  app-port:
-    description: "Application port"
-    required: false
-    default: "8000"
 
   stage:
     description: "Application stage"
@@ -36,11 +31,6 @@ inputs:
   tag:
     description: "New tag for docker image"
     required: false
-
-  stack-file:
-    description: "Relative pat to the CF stack file for the deployment"
-    required: true
-    default: "stackcf.yml"
 
   cluster:
     description: "ECS Cluster name to deploy the container"
@@ -55,6 +45,10 @@ runs:
 
     - name: Setup Docker
       run: sh ${{ github.action_path }}/../common/docker-setup.sh
+      shell: bash
+
+    - name: Setup JQ command
+      run: sh ${{ github.action_path }}/../common/jq-setup.sh
       shell: bash
 
     - name: Build image
@@ -82,13 +76,9 @@ runs:
     - name: Deploy with CF
       run: |
         sh ${{ github.action_path }}/../common/docker/deploy.sh \
-          "$(pwd)/${{ inputs.stack-file }}" \
-          ${{ inputs.tag }} \
-          ${{ inputs.app-name }} \
-          ${{ inputs.app-port }} \
+          ${{ inputs.aws-region }} \
           ${{ inputs.aws-account }} \
-          ${{ inputs.cluster }} \
-          ${{ inputs.aws-access-key-id }} \
-          ${{ inputs.aws-secret-access-key }} \
-          ${{ inputs.aws-region }}
+          ${{ inputs.app-name }} \
+          ${{ inputs.tag }} \
+          ${{ inputs.cluster }}
       shell: bash
