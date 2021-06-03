@@ -52,14 +52,7 @@ if [ -n "$TASK_VERSION" ]; then
 
 
   DEPLOYED_SERVICE=$(aws ecs update-service --cluster $CLUSTER --service $SERVICE_NAME --task-definition $APP_NAME:$TASK_VERSION | jq --raw-output '.service.serviceName')
-  
-  if [[ $DEPLOYED_SERVICE =~ "$SERVICE_NAME" ]]; then
-    echo "\n🚀🚀 Deployment of $DEPLOYED_SERVICE complete!!"
-  else
-    echo $DEPLOYED_SERVICE
-    echo "exit: Error updating service $SERVICE_NAME"
-    exit;
-  fi
+  echo "\n🚀🚀 Deployment of $DEPLOYED_SERVICE complete!!"
 else
     echo "exit: No task definition"
     exit;
