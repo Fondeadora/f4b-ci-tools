@@ -46,13 +46,20 @@ TASK_VERSION=$(aws ecs register-task-definition \
 if [ -n "$TASK_VERSION" ]; then
   echo "🆕 Updating service..."
   echo
-  echo "🔎 Update ECS Cluster: " $CLUSTER
-  echo "🔎 Service: '$SERVICE_NAME'"
-  echo "🔎 Task Definition: " $APP_NAME:$TASK_VERSION
+  echo "🔎 Update ECS Cluster: $CLUSTER"
+  echo "🔎 Service: $SERVICE_NAME"
+  echo "🔎 Task Definition: $APP_NAME:$TASK_VERSION"
 
 
   DEPLOYED_SERVICE=$(aws ecs update-service --cluster $CLUSTER --service $SERVICE_NAME --task-definition $APP_NAME:$TASK_VERSION | jq --raw-output '.service.serviceName')
-  echo "\n🚀🚀 Deployment of $DEPLOYED_SERVICE complete!!"
+  
+  if [[ $DEPLOYED_SERVICE =~ "$SERVICE_NAME" ]]; then
+    echo "\n🚀🚀 Deployment of $DEPLOYED_SERVICE complete!!"
+  else
+    echo $DEPLOYED_SERVICE
+    echo "exit: Error updating service $SERVICE_NAME"
+    exit;
+  fi
 else
     echo "exit: No task definition"
     exit;
