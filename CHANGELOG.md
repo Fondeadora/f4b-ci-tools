@@ -1,3 +1,9 @@
+## v1.4.7 (2021-06-03)
+
+### Fix
+
+- deployment from CF to AWS CLI
+
 ## v1.4.6 (2021-06-01)
 
 ### Fix
