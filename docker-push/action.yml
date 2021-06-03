@@ -79,6 +79,10 @@ runs:
       shell: bash
 
     - name: Deploy with CF
+      env:
+        AWS_ACCESS_KEY_ID: ${{ inputs.aws-access-key-id }}
+        AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}
+        AWS_DEFAULT_REGION: ${{ inputs.aws-region }}
       run: |
         sh ${{ github.action_path }}/../common/docker/deploy.sh \
           ${{ inputs.aws-region }} \
