@@ -22,6 +22,11 @@ inputs:
   app-name:
     description: "Container name that will be used to be deployed"
     required: true
+    
+  app-port:
+    description: "Container exposed port"
+    required: true
+    default: 8000
 
   stage:
     description: "Application stage"
