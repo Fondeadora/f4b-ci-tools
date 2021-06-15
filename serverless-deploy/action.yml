@@ -33,6 +33,11 @@ inputs:
     required: false
     default: "3.8"
 
+  node_version:
+    description: "NodeJS version to use fr serverless dependencies"
+    required: false
+    default: "12"
+
 runs:
   using: "composite"
   steps:
@@ -47,6 +52,12 @@ runs:
       shell: bash
       env:
         ACCESS_TOKEN: ${{ inputs.access_token }}
+
+    - name: Install Node Version
+      run: ${{ github.action_path }}/../common/nvm-setup.sh
+      shell: bash
+      env:
+        NODE_VERSION: ${{ inputs.node_version }}
 
     - name: Install serverless dependencies
       run: ${{ github.action_path }}/../common/install-node-deps.sh

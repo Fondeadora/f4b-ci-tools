@@ -20,6 +20,11 @@ inputs:
     required: false
     default: "3.8"
 
+  env_file:
+    description: "The path of the .env file"
+    required: false
+    default: ".env.example"
+
 runs:
   using: "composite"
   steps:
@@ -46,5 +51,5 @@ runs:
       shell: bash
 
     - name: Run the tests
-      run: ${{ inputs.test_command }}
+      run: POETRY_DOTENV_LOCATION=${{inputs.env_file}} ${{ inputs.test_command }}
       shell: bash
