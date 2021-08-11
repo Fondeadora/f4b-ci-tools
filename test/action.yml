@@ -23,7 +23,7 @@ inputs:
   env_file:
     description: "The path of the .env file"
     required: false
-    default: ".env.example"
+    default: ".env"
 
 runs:
   using: "composite"
