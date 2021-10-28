@@ -41,6 +41,11 @@ inputs:
     description: "ECS Cluster name to deploy the container"
     required: true
 
+  workers:
+    description: "Number of workers to deploy"
+    required: true
+    default: 1
+
 runs:
   using: "composite"
   steps:
@@ -64,7 +69,8 @@ runs:
           ${{ inputs.app-port }} \
           ${{ inputs.aws-access-key-id }} \
           ${{ inputs.aws-region }} \
-          ${{ inputs.aws-secret-access-key }}
+          ${{ inputs.aws-secret-access-key }} \
+          ${{ inputs.workers }}
       shell: bash
 
     - name: Push image
