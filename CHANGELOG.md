@@ -1,3 +1,9 @@
+## v1.5.0 (2021-10-28)
+
+### Feat
+
+- Add docker workers configuration for gunicorn based applications
+
 ## v1.4.8 (2021-08-11)
 
 ### Fix
