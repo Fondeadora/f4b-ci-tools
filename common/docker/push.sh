@@ -13,7 +13,7 @@ export AWS_DEFAULT_REGION=$AWS_REGION
 
 REGISTRY="$AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com"
 
-aws ecr get-login-password --region "$AWS_REGION" | docker login --username AWS --password-stdin "$AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com"
+docker login -u AWS -p $(aws ecr get-login-password --region $AWS_REGION) "$AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com"
 
 docker tag $APP_NAME:latest $REGISTRY/$APP_NAME:latest
 docker push $REGISTRY/$APP_NAME:latest
